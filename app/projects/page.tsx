@@ -1,13 +1,23 @@
 import ProjectList from "@/components/ProjectList";
-import { getProjects } from "@/lib/projects-database";
+import Pagination from "@/components/Pagination";
+import { ProjectSearch } from "@/components/ProjectSearch";
+import { fetchFilteredProjects, fetchProjectsPages } from "@/lib/projects-database";
 
-export default async function About() {
-  const projects = await getProjects();
+// app/projects/page.tsx
+export default async function ProjectsPage(props: {
+  searchParams?: Promise<{ query?: string; page?: string }>;
+}) {
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query || '';
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const projects = await fetchFilteredProjects(query, currentPage);
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="">Projects Overview</h1>
+    <div className="pd-4 max-w-4xl mx-auto py-12">
+      <ProjectSearch />
       <ProjectList projects={projects} />
-    </main>
+      <Pagination totalPages={await fetchProjectsPages(query)} />
+    </div>
   );
 }
