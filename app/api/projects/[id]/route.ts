@@ -9,7 +9,7 @@ export async function GET( _request: Request, { params }: { params: Promise<{ id
         return NextResponse.json({ error: 'Invalid id' }, { status: 400 });
     }
 
-    const project = getProjectById(idnum);
+    const project = await getProjectById(idnum);
 
     if (project) {
         return NextResponse.json(project);
