@@ -1,12 +1,14 @@
 import ProjectList from '@/components/ProjectList';
 const projects = [
   {
+    id: 999,
     title: 'Zombo-Shooter',
     description: 'A simple 2d zombie shooter game',
     technologies: ['Python', 'Pygame'],
     link: 'https://github.com/charsle3/zombo-shooter'
   },
   {
+    id: 999,
     title: 'Service Projects',
     description: 'A web page for organizing service project activity',
     technologies: ['Render.com', 'JavaScript', 'CSS', 'Express'],
